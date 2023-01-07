@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using api.Models;
 using api.Handler;
+using api.database.DataAccess;
 
 namespace api.Controllers
 {
@@ -24,8 +25,9 @@ namespace api.Controllers
         [HttpGet]
         public List<Car> Get()
         {
-            CarHandler myCarHandler = new CarHandler();
-            return myCarHandler.GetAllCars();
+            CarAccess myCarAccess = new CarAccess();
+            return myCarAccess.GetCars();
+
         }
 
         // GET: api/car/5
@@ -39,24 +41,24 @@ namespace api.Controllers
         [HttpPost]
         public void Post([FromBody] Car value)
         {
-            CarHandler myCarHandler = new CarHandler();
-            myCarHandler.AddCar(value);
+            CarAccess myCarAccess = new CarAccess();
+            myCarAccess.AddCar(value);
         }
 
         // PUT: api/car/5
         [HttpPut("{id}")]
         public void Put(string id, [FromBody] Car value)
         {
-            CarHandler myCarHandler = new CarHandler();
-            myCarHandler.EditCar(id, value);
+            CarAccess myCarAccess = new CarAccess();
+            myCarAccess.EditCar(value);
         }
 
         // DELETE: api/car/5
         [HttpDelete("{id}")]
         public void Delete(string id)
         {
-            CarHandler myCarHandler = new CarHandler();
-            myCarHandler.DeleteCar(id);
+            CarAccess myCarAccess = new CarAccess();
+            myCarAccess.DeleteCar(id);
         }
     }
 }
